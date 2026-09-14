@@ -37,20 +37,7 @@ Some skills call other skills. Install these together:
 
 ## What this mirror changes
 
-pstack was written for Cursor, so many of its skills assumed Cursor's folders and tools. This mirror rewrites only those parts. Each skill now tells the agent what to do in its own harness: "in Cursor, do this. In Claude Code, this. In Codex or Pi, this." The rest of every skill is Cursor's text, unchanged.
-
-| What | Cursor's version | In this mirror | Skills |
-|---|---|---|---|
-| Chat history | `~/.cursor/projects/` | Also the Claude Code, Codex, Pi, and OpenCode session folders | `recall`, `reflect`, `automate-me`, `show-me-your-work`, `poteto-mode` |
-| Skill folders | `.cursor/skills/` | The agent's own skill folder | `automate-me`, `create-verification-skill`, `maintain-verification-skill`, `reflect` |
-| Subagents | Cursor's `Task` tool | The agent's subagent tool (`Agent` in Claude Code, `task` in OpenCode, `spawn_agent` in Codex). Without one, the agent runs each step itself. | `how`, `why`, `interrogate`, `swarm`, `reflect`, `no-comments`, `poteto-mode` |
-| Model settings | `~/.cursor/rules/pstack-models.mdc` | `~/.agents/pstack-models.md` outside Cursor | `setup-pstack`, `arena`, `interrogate`, `swarm`, `how`, `why`, `reflect`, `poteto-mode` |
-| Comment Sicko | A Cursor subagent in `agents/` | Bundled inside `no-comments`, so it installs with the skill | `no-comments` |
-| MCP servers | Cursor's `mcps/` folder | The agent's tool list | `why` |
-| Tools pstack doesn't ship | `create-skill`, `/loop`, and `cursor-team-kit` (`deslop`, `control-cli`, `control-ui`) | A named fallback for each | `poteto-mode`, `automate-me`, `reflect` |
-| Worktree audit script | Checks Cursor chats only | Also checks Claude Code and Pi chats before it calls a worktree safe to delete | `poteto-mode` |
-
-`make-bot-ui` is still Cursor-only. It builds pages for Cursor automation webhooks.
+Many skills were Cursor-specific. They've been rewritten to work in any harness.
 <!-- mirror:end -->
 
 ---
