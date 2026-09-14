@@ -2,14 +2,14 @@
 # pstack — standalone mirror
 
 > **Mirror** of [`cursor/plugins/pstack`](https://github.com/cursor/plugins/tree/main/pstack) — kept in sync for standalone use.
-> Works in Claude Code, Codex, and other agents, not only Cursor.
+> Works in Claude Code, Codex, Pi, and other agents, not only Cursor.
 > See also [`backnotprop/bro`](https://github.com/backnotprop/bro), referenced by the [`/bro`](./skills/bro/SKILL.md) skill.
 
 This section explains how to install pstack outside Cursor. The [original README](#pstack) from Cursor follows it, unchanged.
 
 ## Install
 
-pstack is a folder of plain [Agent Skills](https://agentskills.io) (`skills/<name>/SKILL.md`). You don't need Cursor. The [`skills` CLI](https://skills.sh) installs them into Claude Code, Codex, Cursor, OpenCode, and other agents:
+pstack is a folder of plain [Agent Skills](https://agentskills.io) (`skills/<name>/SKILL.md`). You don't need Cursor. The [`skills` CLI](https://skills.sh) installs them into Claude Code, Codex, Pi, Cursor, OpenCode, and other agents:
 
 ```bash
 npx skills add backnotprop/pstack
@@ -17,15 +17,7 @@ npx skills add backnotprop/pstack
 
 The CLI shows every skill in a list you can search. Select the skills you want, then select your agents.
 
-### Choose your skills
-
-You don't need all of them. Pick one of these setups.
-
-**A few skills.** Give each name to `--skill`:
-
-```bash
-npx skills add backnotprop/pstack --skill unslop --skill bro
-```
+## Skills
 
 These skills don't call other pstack skills, so each one works alone:
 
@@ -41,41 +33,27 @@ Some skills call other skills. Install these together:
 | `architect` | `arena`, `how` |
 | `blast-radius` | `arena`, `how`, `why`, `unslop` |
 | `create-verification-skill` | `maintain-verification-skill` |
+| `poteto-mode` | all `principle-*` skills and most of the other skills |
 
-**`poteto-mode`.** It uses all of the `principle-*` skills and most of the other skills. If you install it alone, it points at skills that aren't there. To use it, install everything:
+## Cursor dependencies
 
-```bash
-npx skills add backnotprop/pstack --skill '*'
-```
+> [!WARNING]
+> pstack was written for Cursor. Some skills use Cursor paths, tools, and models. In other agents, those steps fail or do nothing until you rewrite them.
 
-Two skill names have spaces: `Poteto Mode` and `Make Bot UI`. Put them in quotes, for example `--skill "Poteto Mode"`.
+| The skill uses | Skills | How to rewrite |
+|---|---|---|
+| Cursor chat history in `~/.cursor/projects/` | `recall`, `reflect`, `automate-me`, `show-me-your-work` | Point it at your agent's history, for example `~/.claude/projects/` for Claude Code or `~/.codex/sessions/` for Codex. |
+| Skill files in `.cursor/skills/` | `automate-me`, `reflect`, `create-verification-skill`, `maintain-verification-skill` | Change the path to your agent's skill folder, for example `.claude/skills/`, `.agents/skills/`, or `.pi/skills/`. |
+| Cursor's `Task` tool with `subagent_type` | `how`, `why`, `interrogate`, `swarm`, `reflect`, `setup-pstack`, `no-comments`, `poteto-mode` | Change these calls to your agent's subagent tool. |
+| The subagents in [`agents/`](./agents/), which `npx skills` doesn't install | `no-comments` (Comment Sicko), `poteto-mode` (poteto-agent) | Copy the file to your agent's subagent folder and change its frontmatter to that agent's format. |
+| Cursor model names (fable, sol, grok, opus 5) | `architect`, `arena`, `how`, `why`, `interrogate`, `swarm`, `reflect`, `poteto-mode` | Replace them with models your agent has, or remove them so it uses its default model. |
+| The model settings file `~/.cursor/rules/pstack-models.mdc` | `setup-pstack` writes it. `arena`, `interrogate`, and `swarm` read it. | Other agents don't load Cursor rules. Put the model choices in your agent's instructions file (for example `CLAUDE.md` or `AGENTS.md`), or skip `setup-pstack`. |
+| Tools that aren't in this repo: `deslop`, `control-cli`, `control-ui` (Cursor's `cursor-team-kit`), `create-skill` and `/loop` (built into Cursor) | `poteto-mode`, `automate-me`, `reflect` | Remove those steps, or point them at your own tools. |
+| The Grok Bot `update_state` tool | `make-bot-ui` | Skip this skill unless your agent has that tool. |
 
-### More options
+These skills use no Cursor features: `blast-radius`, `bro`, `figure-it-out`, `tdd`, `teach`, `technical-writing`, `typescript-best-practices`, `unslop`, and the `principle-*` skills. (`teach` and `blast-radius` call `how` and `why`, which are in the table.)
 
-```bash
-npx skills add backnotprop/pstack --list            # list the skills without installing
-npx skills add backnotprop/pstack -g                 # install for your user, not one project
-npx skills add backnotprop/pstack -a claude-code     # install for one agent
-npx skills update                                    # get new versions later
-npx skills remove unslop                             # remove a skill
-```
-
-### Cursor
-
-In Cursor, you can install the upstream plugin instead:
-
-```bash
-/add-plugin pstack
-```
-
-## Outside Cursor
-
-pstack was written for Cursor. The skills work in other agents, with these gaps:
-
-- `npx skills` installs skills only. It doesn't install the two subagents in [`agents/`](./agents/): `poteto-agent` and `Comment Sicko`. `/no-comments` needs Comment Sicko. To use it, adapt that file to your agent's subagent format.
-- `/setup-pstack` writes model choices to `~/.cursor/rules/pstack-models.mdc`. Other agents don't read that file, so the skills use their built-in defaults.
-- The skills name models from Cursor's model list (fable, sol, grok, opus 5) and Cursor's `Task` tool. Your agent uses the models and subagent tools it has.
-- `deslop`, `control-cli`, and `control-ui` are in Cursor's `cursor-team-kit` plugin. They aren't in this repo.
+This list comes from a search of the skill files. Read a skill before you depend on it in another agent.
 <!-- mirror:end -->
 
 ---
