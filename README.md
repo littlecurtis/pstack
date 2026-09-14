@@ -1,4 +1,4 @@
-<!-- mirror:start — this top section is specific to the mirror. Everything after mirror:end is the upstream README from cursor/plugins/pstack, copied unchanged. When syncing, replace only the part below mirror:end. -->
+<!-- mirror:start — this top section is specific to the mirror. Everything after mirror:end is the upstream README from cursor/plugins/pstack, unchanged. To sync with upstream, follow MIRROR.md. -->
 # pstack — standalone mirror
 
 > **Mirror** of [`cursor/plugins/pstack`](https://github.com/cursor/plugins/tree/main/pstack) — kept in sync for standalone use.
@@ -35,25 +35,22 @@ Some skills call other skills. Install these together:
 | `create-verification-skill` | `maintain-verification-skill` |
 | `poteto-mode` | all `principle-*` skills and most of the other skills |
 
-## Cursor dependencies
+## What this mirror changes
 
-> [!WARNING]
-> pstack was written for Cursor. Some skills use Cursor paths, tools, and models. In other agents, those steps fail or do nothing until you rewrite them.
+pstack was written for Cursor, so many of its skills assumed Cursor's folders and tools. This mirror rewrites only those parts. Each skill now tells the agent what to do in its own harness: "in Cursor, do this. In Claude Code, this. In Codex or Pi, this." The rest of every skill is Cursor's text, unchanged.
 
-| The skill uses | Skills | How to rewrite |
-|---|---|---|
-| Cursor chat history in `~/.cursor/projects/` | `recall`, `reflect`, `automate-me`, `show-me-your-work` | Point it at your agent's history, for example `~/.claude/projects/` for Claude Code or `~/.codex/sessions/` for Codex. |
-| Skill files in `.cursor/skills/` | `automate-me`, `reflect`, `create-verification-skill`, `maintain-verification-skill` | Change the path to your agent's skill folder, for example `.claude/skills/`, `.agents/skills/`, or `.pi/skills/`. |
-| Cursor's `Task` tool with `subagent_type` | `how`, `why`, `interrogate`, `swarm`, `reflect`, `setup-pstack`, `no-comments`, `poteto-mode` | Change these calls to your agent's subagent tool. |
-| The subagents in [`agents/`](./agents/), which `npx skills` doesn't install | `no-comments` (Comment Sicko), `poteto-mode` (poteto-agent) | Copy the file to your agent's subagent folder and change its frontmatter to that agent's format. |
-| Cursor model names (fable, sol, grok, opus 5) | `architect`, `arena`, `how`, `why`, `interrogate`, `swarm`, `reflect`, `poteto-mode` | Replace them with models your agent has, or remove them so it uses its default model. |
-| The model settings file `~/.cursor/rules/pstack-models.mdc` | `setup-pstack` writes it. `arena`, `interrogate`, and `swarm` read it. | Other agents don't load Cursor rules. Put the model choices in your agent's instructions file (for example `CLAUDE.md` or `AGENTS.md`), or skip `setup-pstack`. |
-| Tools that aren't in this repo: `deslop`, `control-cli`, `control-ui` (Cursor's `cursor-team-kit`), `create-skill` and `/loop` (built into Cursor) | `poteto-mode`, `automate-me`, `reflect` | Remove those steps, or point them at your own tools. |
-| The Grok Bot `update_state` tool | `make-bot-ui` | Skip this skill unless your agent has that tool. |
+| What | Cursor's version | In this mirror | Skills |
+|---|---|---|---|
+| Chat history | `~/.cursor/projects/` | Also the Claude Code, Codex, Pi, and OpenCode session folders | `recall`, `reflect`, `automate-me`, `show-me-your-work`, `poteto-mode` |
+| Skill folders | `.cursor/skills/` | The agent's own skill folder | `automate-me`, `create-verification-skill`, `maintain-verification-skill`, `reflect` |
+| Subagents | Cursor's `Task` tool | The agent's subagent tool (`Agent` in Claude Code, `task` in OpenCode, `spawn_agent` in Codex). Without one, the agent runs each step itself. | `how`, `why`, `interrogate`, `swarm`, `reflect`, `no-comments`, `poteto-mode` |
+| Model settings | `~/.cursor/rules/pstack-models.mdc` | `~/.agents/pstack-models.md` outside Cursor | `setup-pstack`, `arena`, `interrogate`, `swarm`, `how`, `why`, `reflect`, `poteto-mode` |
+| Comment Sicko | A Cursor subagent in `agents/` | Bundled inside `no-comments`, so it installs with the skill | `no-comments` |
+| MCP servers | Cursor's `mcps/` folder | The agent's tool list | `why` |
+| Tools pstack doesn't ship | `create-skill`, `/loop`, and `cursor-team-kit` (`deslop`, `control-cli`, `control-ui`) | A named fallback for each | `poteto-mode`, `automate-me`, `reflect` |
+| Worktree audit script | Checks Cursor chats only | Also checks Claude Code and Pi chats before it calls a worktree safe to delete | `poteto-mode` |
 
-These skills use no Cursor features: `blast-radius`, `bro`, `figure-it-out`, `tdd`, `teach`, `technical-writing`, `typescript-best-practices`, `unslop`, and the `principle-*` skills. (`teach` and `blast-radius` call `how` and `why`, which are in the table.)
-
-This list comes from a search of the skill files. Read a skill before you depend on it in another agent.
+`make-bot-ui` is still Cursor-only. It builds pages for Cursor automation webhooks.
 <!-- mirror:end -->
 
 ---
