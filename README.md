@@ -1,22 +1,12 @@
+<!-- mirror:start — this top section is specific to the mirror. Everything after mirror:end is the upstream README from cursor/plugins/pstack, copied unchanged. When syncing, replace only the part below mirror:end. -->
+# pstack — standalone mirror
+
 > **Mirror** of [`cursor/plugins/pstack`](https://github.com/cursor/plugins/tree/main/pstack) — kept in sync for standalone use.
-> Works in Claude Code, Codex, and other agents, not only Cursor. See [Install](#install).
-> See also [`backnotprop/bro`](https://github.com/backnotprop/bro), referenced by the [`/bro`](./skills/bro/SKILL.md) skill below.
+> Works in Claude Code, Codex, and other agents, not only Cursor.
+> See also [`backnotprop/bro`](https://github.com/backnotprop/bro), referenced by the [`/bro`](./skills/bro/SKILL.md) skill.
 
-# pstack
+This section explains how to install pstack outside Cursor. The [original README](#pstack) from Cursor follows it, unchanged.
 
-i'm [poteto](https://x.com/poteto). i'm not a president or ceo, but i've worked with millions of lines of code at Meta, Netflix, and Cursor. i'm also on the react core team where i help build and maintain react compiler.
-
-there's a growing sense that ai writes too much slop code. i agree. i don't want to ship like a team of twenty slop artists. throughput without quality is not a goal i aspire to. if you want to go fast, go deep first. 
-
-**pstack is my answer.** these are the same skills i use everyday to ship high quality code at Cursor. this turns cursor into a real engineering team. the goal is not to maximize loc, in fact it's the opposite. pstack helps you write less, but higher quality code.
-
-**pstack gives you fearless parallelism.** when you can go deep on one agent and trust it to write good, verifiable code, you can truly parallelize with confidence. start multiple agents up with `poteto-mode` and trust that they'll apply rigorous engineering principles to their work.
-
-**cursor gives you the best of all worlds.** every frontier model has its strengths and weaknesses. use any model with pstack. in fact, many of my skills use multi-model workflows to take advantage of each model's unique strengths.
-
-fork it. improve it. make it yours. PRs are welcome! 
-
-<!-- mirror:install:start — mirror-specific section; keep it when syncing README from upstream -->
 ## Install
 
 pstack is a folder of plain [Agent Skills](https://agentskills.io) (`skills/<name>/SKILL.md`). You don't need Cursor. The [`skills` CLI](https://skills.sh) installs them into Claude Code, Codex, Cursor, OpenCode, and other agents:
@@ -78,7 +68,7 @@ In Cursor, you can install the upstream plugin instead:
 /add-plugin pstack
 ```
 
-### Outside Cursor
+## Outside Cursor
 
 pstack was written for Cursor. The skills work in other agents, with these gaps:
 
@@ -86,7 +76,29 @@ pstack was written for Cursor. The skills work in other agents, with these gaps:
 - `/setup-pstack` writes model choices to `~/.cursor/rules/pstack-models.mdc`. Other agents don't read that file, so the skills use their built-in defaults.
 - The skills name models from Cursor's model list (fable, sol, grok, opus 5) and Cursor's `Task` tool. Your agent uses the models and subagent tools it has.
 - `deslop`, `control-cli`, and `control-ui` are in Cursor's `cursor-team-kit` plugin. They aren't in this repo.
-<!-- mirror:install:end -->
+<!-- mirror:end -->
+
+---
+
+# pstack
+
+i'm [poteto](https://x.com/poteto). i'm not a president or ceo, but i've worked with millions of lines of code at Meta, Netflix, and Cursor. i'm also on the react core team where i help build and maintain react compiler.
+
+there's a growing sense that ai writes too much slop code. i agree. i don't want to ship like a team of twenty slop artists. throughput without quality is not a goal i aspire to. if you want to go fast, go deep first. 
+
+**pstack is my answer.** these are the same skills i use everyday to ship high quality code at Cursor. this turns cursor into a real engineering team. the goal is not to maximize loc, in fact it's the opposite. pstack helps you write less, but higher quality code.
+
+**pstack gives you fearless parallelism.** when you can go deep on one agent and trust it to write good, verifiable code, you can truly parallelize with confidence. start multiple agents up with `poteto-mode` and trust that they'll apply rigorous engineering principles to their work.
+
+**cursor gives you the best of all worlds.** every frontier model has its strengths and weaknesses. use any model with pstack. in fact, many of my skills use multi-model workflows to take advantage of each model's unique strengths.
+
+fork it. improve it. make it yours. PRs are welcome! 
+
+## install
+
+```bash
+/add-plugin pstack
+```
 
 ## get started
 
@@ -201,7 +213,7 @@ the full rules and playbooks live in [`skills/poteto-mode/SKILL.md`](./skills/po
 | [`/create-verification-skill`](./skills/create-verification-skill/SKILL.md) | your project has no scripted way to prove app behavior. generates a project-local verify skill with a feature map, for any language or platform. |
 | [`/maintain-verification-skill`](./skills/maintain-verification-skill/SKILL.md) | your verify skill's feature map has drifted from the app. source wave + one live pass, at most one PR of proven corrections. |
 | [`/unslop`](./skills/unslop/SKILL.md) | you're cleaning up writing. removes AI tells. |
-| [`/bro`](./skills/bro/SKILL.md) | you want the last message restated in plain human language, no jargon. see also [backnotprop/bro](https://github.com/backnotprop/bro). |
+| [`/bro`](./skills/bro/SKILL.md) | you want the last message restated in plain human language, no jargon. |
 | [`/technical-writing`](./skills/technical-writing/SKILL.md) | layered doc standard (Diátaxis + Google developer style + STE + Global English) for docs, RFCs, readmes, PR descriptions, commit messages. |
 
 </details>
