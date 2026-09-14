@@ -5,7 +5,7 @@
 > Works in Claude Code, Codex, Pi, and other agents, not only Cursor.
 > See also [`backnotprop/bro`](https://github.com/backnotprop/bro), referenced by the [`/bro`](./skills/bro/SKILL.md) skill.
 
-This section explains how to install pstack outside Cursor. The [original README](#pstack) from Cursor follows it, unchanged.
+Cursor's original README is [further down this page](#pstack).
 
 ## Install
 
