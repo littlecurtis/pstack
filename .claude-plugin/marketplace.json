@@ -1,0 +1,13 @@
+{
+	"name": "littlecurtis",
+	"owner": {
+		"name": "Curtis Little"
+	},
+	"plugins": [
+		{
+			"name": "pstack",
+			"source": "./",
+			"description": "pstack + curtis-mode. Rigorous agent workflows routed by change risk."
+		}
+	]
+}

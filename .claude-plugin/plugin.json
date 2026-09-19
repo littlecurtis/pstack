@@ -1,0 +1,19 @@
+{
+	"name": "pstack",
+	"version": "0.15.2-curtis.1",
+	"description": "pstack (poteto's rigorous-engineering skills and principles) plus Curtis's Life OS build loop: curtis-mode routing, lens review, vault briefs. Fork of backnotprop/pstack.",
+	"author": {
+		"name": "Curtis Little"
+	},
+	"homepage": "https://github.com/littlecurtis/pstack",
+	"repository": "https://github.com/littlecurtis/pstack",
+	"license": "MIT",
+	"keywords": [
+		"pstack",
+		"curtis-mode",
+		"poteto-mode",
+		"principles",
+		"review-lenses",
+		"build-loop"
+	]
+}
