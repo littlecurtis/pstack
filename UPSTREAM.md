@@ -21,7 +21,9 @@ Skills are namespaced `/pstack:<skill>`. Entry point: `/pstack:curtis-mode`.
 <!-- derived-from: skills/interrogate/SKILL.md @ 157aae3 -->
 ```
 
-`skills/curtis-mode/` (from `poteto-mode`), `skills/lens-review/` (from `interrogate`), `skills/laravel-best-practices/` (from `principle-type-system-discipline`), `skills/test-behavior-pest/` (from `principle-test-behavior-not-implementation`), `agents/curtis-agent.md` (from `poteto-agent.md`). The upstream original stays next to it untouched.
+`skills/curtis-mode/` (from `poteto-mode`), `skills/lens-review/` (from `interrogate`, with its generic `lenses/` rubrics), `skills/type-system-php/` (from `principle-type-system-discipline`), `skills/test-behavior-pest/` (from `principle-test-behavior-not-implementation`), `agents/curtis-agent.md` (from `poteto-agent.md`). The upstream original stays next to it untouched. `type-system-php` is not `laravel-best-practices` because Laravel Boost ships a skill by that name into every Boost repo.
+
+**Layer 3: the repo's, not the plugin's.** Harnesses (`verify-mesh-mind`), repo-specific lens rubrics (`house-conventions`, `brand-voice`) and routing specifics live in each repo's `.claude/` and `CLAUDE.md`, under a `curtis-mode: this repo` heading that `curtis-mode` reads at start.
 
 The header is what makes upstream changes reviewable: `scripts/upstream-diff.sh` reads every `derived-from` header and shows what upstream changed in each source since the SHA we derived from.
 

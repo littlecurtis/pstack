@@ -33,7 +33,7 @@ while IFS= read -r file; do
 		printf '%-50s  ~  %s:%s\n' "$file" "$src" "$changes"
 		[ "$mode" = "--patch" ] && git diff "$sha" upstream/main -- "$src"
 	fi
-done < <(git ls-files -co --exclude-standard 'skills/*/SKILL.md' 'agents/*.md')
+done < <(git ls-files -co --exclude-standard 'skills/*.md' 'agents/*.md')
 
 [ "$found" = 0 ] && echo "no derived-from headers found"
 exit 0
