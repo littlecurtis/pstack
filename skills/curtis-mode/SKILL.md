@@ -73,7 +73,7 @@ The implementing subagent runs this loop; a bullet that names the orchestrator i
 
 - **Name the data shape first** on rows 3–6. Structure over scattered conditionals (**principle-model-the-domain**): enum + `match`, a registry, a state machine, a value object.
 - **Rows 3 / 4 / 5 introducing a new module or public shape:** the orchestrator gets two design sketches (types, signatures, `not implemented` bodies) before code, as two subagents (Opus + Fable). Pick one, say why in the trail. Skip when the shape is already concrete; log `skip: shape exists`.
-- **Rows 5 / 7 / 8:** the orchestrator runs **blast-radius** on the accepted diff before lens review. Its output goes in the brief's Build result.
+- **Rows 5 / 7 / 8:** the orchestrator runs **blast-radius** on the accepted diff before lens review. Its output goes in the brief's Build result. Its arena step (item 6) is skipped: `arena` isn't shipped by this plugin (model diversity in review is deferred; vault decision 11).
 - **Row 6:** hit the live endpoint during build. A read against the real API, a write against a throwaway record (ask Curtis first when the outside system can't delete it). Don't leave live checks for pre-push. (Loop learning #2.)
 - **Row 7:** pin the behavior with a characterization test before moving anything. Keep it green through every step. If reader load didn't drop, revert.
 - **Row 10 and any bug:** failing test first when the test path is cheap (**tdd** skill). Prefer no new test over a bad one (**test-behavior-pest**).
