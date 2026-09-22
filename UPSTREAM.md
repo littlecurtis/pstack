@@ -1,6 +1,6 @@
 # Maintaining this fork
 
-This repo is `littlecurtis/pstack`: a fork of [`backnotprop/pstack`](https://github.com/backnotprop/pstack) (itself a mirror of `cursor/plugins/pstack`), packaged as a Claude Code plugin and extended with Curtis's Life OS build loop. `MIRROR.md` describes how backnotprop tracks Cursor; this file describes how we track backnotprop.
+This repo is `littlecurtis/pstack`: a fork of [`backnotprop/pstack`](https://github.com/backnotprop/pstack) (itself a mirror of `cursor/plugins/pstack`), packaged as a Claude Code plugin and extended with Curtis's build loop (`curtis-mode`), which is the same in every repo. `MIRROR.md` describes how backnotprop tracks Cursor; this file describes how we track backnotprop.
 
 ## Install
 
@@ -23,7 +23,7 @@ Skills are namespaced `/pstack:<skill>`. Entry point: `/pstack:curtis-mode`.
 
 `skills/curtis-mode/` (from `poteto-mode`), `skills/lens-review/` (from `interrogate`, with its generic `lenses/` rubrics), `skills/type-system-php/` (from `principle-type-system-discipline`), `skills/test-behavior-pest/` (from `principle-test-behavior-not-implementation`), `agents/curtis-agent.md` (from `poteto-agent.md`). The upstream original stays next to it untouched. `type-system-php` is not `laravel-best-practices` because Laravel Boost ships a skill by that name into every Boost repo.
 
-**Layer 3: the repo's, not the plugin's.** Harnesses (`verify-mesh-mind`), repo-specific lens rubrics (`house-conventions`, `brand-voice`) and routing specifics live in each repo's `.claude/` and `CLAUDE.md`, under a `curtis-mode: this repo` heading that `curtis-mode` reads at start.
+**Layer 3: the repo's, not the plugin's.** Nothing in this plugin names one project. Each repo's specifics (test command, formatter, live-check harness such as mesh-mind's `verify-mesh-mind`, brief location, what production is, repo-specific lens rubrics like `house-conventions` and `brand-voice`) live in that repo's `.claude/` and `CLAUDE.md`, under a `curtis-mode: this repo` heading that `curtis-mode` reads at start.
 
 The header is what makes upstream changes reviewable: `scripts/upstream-diff.sh` reads every `derived-from` header and shows what upstream changed in each source since the SHA we derived from.
 
@@ -46,5 +46,5 @@ Upstream is LF. This clone lives on Windows and is also used from WSL. `.gitattr
 
 - Never edit a Layer 1 file. If you need it different, copy it to a new name with a `derived-from` header.
 - Never delete a Layer 1 file.
-- `LICENSE` is upstream's (MIT, Lauren Tan). Layer 2 files carry the `derived-from` header as attribution. Wholly new files (lens rubrics, vault templates) need no header.
+- `LICENSE` is upstream's (MIT, Lauren Tan). Layer 2 files carry the `derived-from` header as attribution. Wholly new files (lens rubrics) need no header.
 - Pin: the SHA we last merged is `git merge-base HEAD upstream/main`. No lock file needed.

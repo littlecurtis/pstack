@@ -3,7 +3,7 @@ name: lens-review
 description: "The review step of curtis-mode: one readonly Claude subagent per lens in the change's routing-table row, each with its own rubric, then a lead judgment into numbered Act on / Consider / Noted / Dismissed findings. Use for /lens-review, 'review this', or after self-critique on any row."
 disable-model-invocation: true
 ---
-<!-- derived-from: skills/interrogate/SKILL.md @ 157aae3 · changes: one reviewer per LENS (from the routing-table row) instead of one per model, each with its own rubric in lenses/; findings numbered for one-gesture replies; output goes to the vault brief's Review section -->
+<!-- derived-from: skills/interrogate/SKILL.md @ 157aae3 · changes: one reviewer per LENS (from the routing-table row) instead of one per model, each with its own rubric in lenses/; findings numbered for one-gesture replies; output goes to the brief's Review section -->
 
 # Lens review
 
@@ -13,13 +13,13 @@ The deliverable is a synthesized, numbered verdict. Do NOT auto-apply changes.
 
 ## Step 1, Scope
 
-- The diff: `git diff <base>..HEAD` for committed work, `git diff` plus `git diff --cached` for uncommitted.
+- The diff: `git diff` plus `git diff --cached` for uncommitted work (the default: curtis-mode reviews before commit), `git diff <base>..HEAD` for committed.
 - The rows touched and their union lens set, from the brief (curtis-mode's routing table).
-- Any context files a reviewer needs to judge the change: the feature file (in mesh-mind, `docs/features/`), the files the diff calls into.
+- Any context files a reviewer needs to judge the change: the feature spec if the repo keeps one, the files the diff calls into.
 
 ## Step 2, State the intent
 
-One paragraph: what the change is for, who uses it, what it must not break. Derive it from the brief, the feature file and the commits. If the intent is unclear, that is itself an Act-on finding; don't invent one.
+One paragraph: what the change is for, who uses it, what it must not break. Derive it from the brief, any feature spec and the diff. If the intent is unclear, that is itself an Act-on finding; don't invent one.
 
 ## Step 3, Spawn the reviewers
 
@@ -72,7 +72,7 @@ Write this into the brief's **Review** section and into the reply:
 <where lenses agreed, where they diverged, what that says>
 ```
 
-Number findings across the whole table so Curtis can reply `2: fix`, `all: go`. After fixing Act-on items, add a line under the table naming each fix's commit.
+Number findings across the whole table so Curtis can reply `2: fix`, `all: go`. After fixing Act-on items, add a line under the table naming each fix (`file:line` while uncommitted, the commit once Curtis has committed).
 
 ## Independence
 

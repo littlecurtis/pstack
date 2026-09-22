@@ -40,6 +40,8 @@
 				"./skills/principle-separate-before-serializing-shared-state",
 				"./skills/principle-sequence-verifiable-units",
 				"./skills/principle-subtract-before-you-add",
+				"./skills/principle-test-behavior-not-implementation",
+				"./skills/principle-type-system-discipline",
 				"./skills/recall",
 				"./skills/reflect",
 				"./skills/show-me-your-work",
